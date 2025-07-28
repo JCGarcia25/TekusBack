@@ -1,10 +1,7 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Queries;
+using Domain.Countries;
+using Domain.Interfaces;
+using MediatR;
 
 namespace Application.Handlers
 {
