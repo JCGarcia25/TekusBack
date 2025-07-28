@@ -1,0 +1,57 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+*.log
+*.cache
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.lastbuildstate
+*.sbr
+*.sln.metaproj
+*.tmp_proj
+*.tmp
+*.csproj.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+
+# NuGet
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Core
+appsettings.json
+appsettings.*.json
+
+# Rider
+.idea/
+*.iml
+
+# Draw.io files
+*.drawio.bak
+*.drawio~*
+
+# Logs
+*.log
+logs/
+
+# Generated files
+*.g.cs
+*.g.props
+*.g.targets
+*.GeneratedMSBuildEditorConfig.editorconfig
+
+# Other
+*.DS_Store
+*.Thumbs.db
