@@ -4,6 +4,7 @@
     {
         IProviderRepository Providers { get; }
         IServiceRepository Services { get; }
+        IProviderAttributeRepository ProviderAttributes { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

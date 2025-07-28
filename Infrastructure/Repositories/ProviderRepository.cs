@@ -17,7 +17,11 @@ namespace Infrastructure.Repositories
 
         public async Task<Provider?> GetByIdAsync(Guid id)
         {
-            return await _context.Providers.FindAsync(id);
+            return await _context.Providers
+                .Include(p => p.Services)
+                .ThenInclude(s => s.Countries)
+                .Include(p => p.CustomAttributes)
+                .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
         }
 
         public Task<Provider?> GetByNitAsync(string nit)

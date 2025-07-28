@@ -18,7 +18,10 @@ namespace Infrastructure.Repositories
         }
         public async Task<IEnumerable<Service>> GetAllAsync()
         {
-            return await _context.Services.ToListAsync();
+            return await _context.Services
+                .Where(s => !s.IsDeleted && s.Provider != null && !s.Provider.IsDeleted)
+                .Include(s => s.Countries)
+                .ToListAsync();
         }
         public async Task AddAsync(Service service)
         {

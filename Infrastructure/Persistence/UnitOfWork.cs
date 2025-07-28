@@ -6,14 +6,17 @@ namespace Infrastructure.Persistence
     {
         private readonly TekusDbContext _context;
         private readonly IProviderRepository _providerRepository;
+        private readonly IProviderAttributeRepository _providerAttributeRepository;
         private readonly IServiceRepository _serviceRepository;
 
-        public UnitOfWork(TekusDbContext context, IProviderRepository providerRepository, IServiceRepository serviceRepository)
+        public UnitOfWork(TekusDbContext context, IProviderRepository providerRepository, IServiceRepository serviceRepository, IProviderAttributeRepository providerAttributeRepository)
         {
             _context = context;
             _providerRepository = providerRepository;
             _serviceRepository = serviceRepository;
+            _providerAttributeRepository = providerAttributeRepository;
         }
+        public IProviderAttributeRepository ProviderAttributes => _providerAttributeRepository;
         public IProviderRepository Providers => _providerRepository;
         public IServiceRepository Services => _serviceRepository;
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

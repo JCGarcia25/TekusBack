@@ -42,10 +42,24 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProviders()
+        public async Task<IActionResult> GetProviders(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? sortBy = null,
+        [FromQuery] bool sortAscending = true,
+        [FromQuery] string? searchTerm = null)
         {
-            var providers = await _mediator.Send(new GetProvidersQuery());
-            return Ok(providers);
+            var query = new GetProvidersQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                SortBy = sortBy,
+                SortAscending = sortAscending,
+                SearchTerm = searchTerm
+            };
+
+            var result = await _mediator.Send(query);
+            return Ok(result);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProvider(Guid id)

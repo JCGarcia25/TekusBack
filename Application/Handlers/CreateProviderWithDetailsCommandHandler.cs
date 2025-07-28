@@ -22,10 +22,7 @@ namespace Application.Handlers
             {
                 throw new Exception($"Provider with NIT {request.Nit} already exists.");
             }
-            if (!Utils.IsValidEmail(request.Email))
-            {
-                throw new Exception($"Email {request.Email} is not valid.");
-            }
+
             var provider = Provider.Create(request.Nit, request.Name, request.Email);
 
             foreach (var serviceDto in request.Services)
