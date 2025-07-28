@@ -16,6 +16,12 @@ namespace Application.Handlers
 
         public async Task<Guid> Handle(CreateProviderCommand request, CancellationToken cancellationToken)
         {
+            var existingProvider = await _unitOfWork.Providers.GetByNitAsync(request.Nit);
+            if (existingProvider != null)
+            {
+                throw new Exception($"Provider with NIT {request.Nit} already exists.");
+            }
+
             var provider = Provider.Create(request.Nit, request.Name, request.Email);
             await _unitOfWork.Providers.AddAsync(provider);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

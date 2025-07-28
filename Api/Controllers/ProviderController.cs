@@ -16,6 +16,20 @@ namespace Api.Controllers
             _mediator = mediator;
         }
 
+        [HttpPost("with-details")]
+        public async Task<IActionResult> CreateProviderWithDetails(CreateProviderWithDetailsCommand command)
+        {
+            try
+            {
+                var id = await _mediator.Send(command);
+                return CreatedAtAction(nameof(GetProvider), new { id }, null);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateProvider(CreateProviderCommand command)
         {
