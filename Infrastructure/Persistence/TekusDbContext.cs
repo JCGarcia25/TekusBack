@@ -2,7 +2,7 @@
 using Domain.Providers;
 using Microsoft.EntityFrameworkCore;
 
-namespace Insfrastructure.Persistence
+namespace Infrastructure.Persistence
 {
     public class TekusDbContext : DbContext
     {
