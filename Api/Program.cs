@@ -19,6 +19,7 @@ var audience = jwtSettings["Audience"];
 builder.Services.AddDbContext<TekusDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TekusDb")));
 
+builder.Services.AddHttpClient();
 builder.Services.AddSingleton(new JwtProvider(secretKey, issuer, audience));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -39,6 +40,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IProviderRepository, ProviderRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IProviderAttributeRepository, ProviderAttributeRepository>();
+builder.Services.AddSingleton<ICountryRepository, CountryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DeleteProviderCommand).Assembly));
