@@ -1,12 +1,16 @@
 ﻿using Application.Commands;
 using Application.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
+
+
     public class ProviderController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -53,6 +57,30 @@ namespace Api.Controllers
             }
             return Ok(provider);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProvider(Guid id, UpdateProviderCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest("Provider ID mismatch.");
+            }
+
+            try
+            {
+                var result = await _mediator.Send(command);
+                if (!result)
+                {
+                    return NotFound();
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProvider(Guid id)
         {
